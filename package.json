@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://git.heroku.com/faucet-ftr.git"
   },
-  "author": "poanetwork",
+  "author": "factorynetwork",
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.19.0",

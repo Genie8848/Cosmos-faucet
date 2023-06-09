@@ -18,24 +18,24 @@ module.exports = function (app) {
 		const isDebug = app.config.debug
 		debug(isDebug, "REQUEST:")
 		debug(isDebug, request.body)
-		const recaptureResponse = request.body["g-recaptcha-response"]
-		if (!recaptureResponse) {
-			const error = {
-				message: messages.INVALID_CAPTCHA,
-			}
-			return generateErrorResponse(response, error)
-		}
+		// const recaptureResponse = request.body["g-recaptcha-response"]
+		// if (!recaptureResponse) {
+		// 	const error = {
+		// 		message: messages.INVALID_CAPTCHA,
+		// 	}
+		// 	return generateErrorResponse(response, error)
+		// }
 
-		let captchaResponse
-		try {
-			captchaResponse = await validateCaptcha(app, recaptureResponse)
-		} catch(e) {
-			return generateErrorResponse(response, e)
-		}
+		// let captchaResponse
+		// try {
+		// 	captchaResponse = await validateCaptcha(app, recaptureResponse)
+		// } catch(e) {
+		// 	return generateErrorResponse(response, e)
+		// }
 		const receiver = request.body.receiver
-		if (await validateCaptchaResponse(captchaResponse, receiver, response)) {
+		// if (await validateCaptchaResponse(captchaResponse, receiver, response)) {
 			await sendPOAToRecipient(web3, receiver, response, isDebug)
-		}
+		// }
 	});
 
 	app.get('/health', async function(request, response) {
