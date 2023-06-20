@@ -1,38 +1,95 @@
-## Factory Network faucet
+# faucet
 
-### Building from source
+General Faucet for Cosmos SDK testnet. There are two versions: [Cosmos](https://github.com/ping.pub/faucet) and [Evmos](https://github.com/ping-pub/faucet/tree/evmos)
 
-1. Clone repository
-  ```
-  git clone https://github.com/genie8848/Cosmos-faucet
-  ```
-2. Copy `config.json.example` to `config.json`
-  ```
-  cp config.json.example config.json
-  ```
-2. Update config.json `./config.json` (see config.json with placeholders below)
-3. Update `./public/index.html`: Find `<div class="g-recaptcha" data-sitekey="type your reCaptcha plugin secret here"></div>` line and type your reCaptcha plugin secret in `data-sitekey` attribute. For more info, [see](https://developers.google.com/recaptcha/docs/verify?hl=ru)
-4. Install dependencies `npm install` from the project's root
-5. Run faucet with `npm start`. Factory Network faucet will be launched at `http://localhost:5000`
+<img width="1052" alt="preview" src="https://user-images.githubusercontent.com/2882920/202998797-b793c52b-9ad7-47fe-a80b-a0f75eff6ba1.png">
 
-### Server config.json (`./config.json`) with placeholders
+## Prerequisite
+
+```sh
+node -v
+v16.15.0
 ```
-{
-  "environment": "switcher between configurations: 'prod' or 'dev'",
-  "debug": "switch on/off server logs: true or false",
-  "Captcha": {
-    "secret": "reCaptcha plugin secret"
-  },
-  "Ethereum": {
-    "etherToTransfer": "The number of milliEther to be sent from the faucet. For example, 500",
-    "gasLimit": "Transaction gas limit, for example, 21000",
-    "prod": {
-      "rpc": "JSON RPC endpoint. For example, https://factory.network",
-      "account": "The address from which the funds will be drained",
-      "privateKey": "Private key of the account"
+
+# Installation
+
+ - clone code:
+ 
+ ```sh
+ git clone https://github.com/ping-pub/faucet.git
+ ```
+ 
+ - setup configs, you have to change everything you need in `./config.js`
+ ```js
+ {
+    "port": 80,  // http port 
+    "db": {
+        "path": "~/.faucet.db" // db for frequency checker(WIP)
+    }, 
+    "blockchain": {
+        "rpc_endpoint": "https://rpc.sentry-02.theta-testnet.polypore.xyz"
     },
-    "dev": {
-      ...
+    "sender": {
+        "mnemonic": "surround miss nominee dream gap cross assault thank captain prosper drop duty group candy wealth weather scale put",
+        "option": {
+            "hdPaths": ["m/44'/118'/0'/0/0"],
+            "prefix": "cosmos"  //address prefix
+        }
+    },
+    "tx": {
+        "amount": {
+            "denom": "uatom",
+            "amount": "10000" // how many does tx send for each request.
+          },
+        "fee": {
+            "amount": [
+                {
+                  "amount": "1000",
+                  "denom":  "uatom"
+                }
+            ],
+            "gas": "200000"
+        },
+        "frequency_in_24h": "1"
+    },
+    "project": {
+        "testnet": "Ping Testnet", // What ever you want, recommend: chain-id, 
+        "logo": "https://ping.pub/logo.svg",
+        "deployer": ""
+    },
+    // request limitation
+    limit: {
+        // how many times each wallet address is allowed in a window(24h)
+        address: 1, 
+        // how many times each ip is allowed in a window(24h),
+        // if you use proxy, double check if the req.ip returns client's ip.
+        ip: 10 
     }
-  }
 }
+ ```
+ 
+ - Run faucet
+ ```sh
+ node --es-module-specifier-resolution=node faucet.js
+ ```
+ 
+ # Test
+ 
+ visit http://localhost:80 
+ 
+ 80 is default, you can edit it in the config.json
+ 
+ # Donation
+
+Your donation will help us make better products. Thanks in advance.
+
+ - Address for ERC20: USDC, USDT, ETH
+```
+0x88BFec573Dd3E4b7d2E6BfD4D0D6B11F843F8aa1
+```
+
+ - You can donate any token in the Cosmos ecosystem: [here](https://ping.pub/coffee)
+ 
+ 
+ 
+ 

@@ -1,47 +1,40 @@
 {
-  "name": "factory-network-ftr-faucet",
-  "version": "1.0.2",
-  "description": "Factory Network faucet",
-  "main": "index.js",
+  "name": "faucet",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Faucet for Cosmos-SDK blockchains",
+  "main": "faucet.js",
   "scripts": {
-    "start": "npm run sass && npm run coffee && node index.js",
-    "sass": "gulp sass",
-    "coffee": "gulp javascript",
-    "watch": "gulp watch"
+    "start": "node --experimental-modules --es-module-specifier-resolution=node faucet.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://git.heroku.com/faucet-ftr.git"
+    "url": "git+https://github.com/ping-pub/faucet.git"
   },
-  "author": "factorynetwork",
+  "keywords": [
+    "Faucet",
+    "Cosmos",
+    "SDK",
+    "blockchain"
+  ],
+  "author": "Ping",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ping-pub/faucet/issues"
+  },
+  "homepage": "https://github.com/ping-pub/faucet#readme",
   "dependencies": {
-    "body-parser": "1.19.0",
-    "ethereumjs-tx": "^2.1.2",
-    "express": "4.18.1",
-    "gulp": "^3.9.1",
-    "gulp-add-src": "^0.2.0",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-cli": "2.2.0",
-    "gulp-concat": "2.6.1",
-    "gulp-concat-css": "^1.2.0",
-    "gulp-include": "2.4.1",
-    "gulp-order": "1.2.0",
-    "gulp-postcss": "8.0.0",
-    "gulp-sass": "5.1.0",
-    "gulp-sass-glob": "1.1.0",
-    "gulp-uglify": "3.0.2",
-    "gulp-uglifycss": "1.1.0",
-    "http-server": "^14.1.1",
-    "moment": "^2.29.4",
-    "querystring": "0.2.0",
-    "sass": "^1.49.8",
-    "web3": "^1.7.5"
-  },
-  "overrides": {
-    "graceful-fs": "^4.2.10"
-  },
-  "engines": {
-    "node": "16.16.0"
+    "@cosmjs/crypto": "^0.29.4",
+    "@cosmjs/proto-signing": "^0.29.4",
+    "@cosmjs/stargate": "^0.29.4",
+    "@ethersproject/wallet": "^5.7.0",
+    "@hanchon/evmos-ts-wallet": "^0.2.0",
+    "@tharsis/transactions": "^0.2.6",
+    "express": "^4.18.2",
+    "level": "^8.0.0",
+    "nodemodule": "^0.3.0",
+    "bech32": "^2.0.0",
+    "ethers": "^5.7.1"
   }
 }
